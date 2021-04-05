@@ -106,5 +106,7 @@ venv.bak/
 # csv 
 *.csv
 
+# pickle
+*.pkl
 # data folder
 /raw_imu_data
