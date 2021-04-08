@@ -108,5 +108,9 @@ venv.bak/
 
 # pickle
 *.pkl
+
+* neural network weights
+*.h5
+
 # data folder
 /raw_imu_data
