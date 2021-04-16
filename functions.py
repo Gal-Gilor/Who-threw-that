@@ -25,7 +25,6 @@ from sklearn.ensemble import AdaBoostRegressor
 
 import xgboost as xgb
 
-from modulefinder import ModuleFinder
 
 # graph styling
 plt.style.use('seaborn-dark')
@@ -100,8 +99,9 @@ def create_line(x: Union[pd.Series, List], y: Union[pd.Series, List], title: Opt
     return ax
 
 
-def create_scatter(x: Union[pd.Series, List], y: Union[pd.Series, List], title: Optional[str] = None,
-                   xlabel: Optional[str] = None, ylabel: Optional[str] = None):
+def create_scatter(x: Union[np.array, pd.Series, List], y: Union[np.array, pd.Series, List],
+                   title: Optional[str] = None, xlabel: Optional[str] = None,
+                   ylabel: Optional[str] = None) -> None:
     '''
     plots histograms
     inputs:
@@ -120,7 +120,7 @@ def create_scatter(x: Union[pd.Series, List], y: Union[pd.Series, List], title: 
     ax.set_xlabel(xlabel)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    return ax
+    return
 
 
 def three_dimonsional_scatter(x: Union[np.array, List, pd.Series],
@@ -349,7 +349,7 @@ def process_data(dictionary_df: pd.DataFrame, path_to_data: str) -> None:
     except Exception as e:
         print(str(e))
 
-    return proccessed_data
+    return
 
 # Modeling Functions
 

@@ -24,6 +24,23 @@ Since the owner already transformed the raw data, I assume they also calibrated 
 
 ### Dataset Overview
 
-### Data Integrity
+The owner published 106 files containing information.
 
-Overall, the data is clean without missing values. However, the 
+The file 'Speed-Filenames.csv' contains 105 rows and two columns; radar gun speed and the file name with the IMU measurements.
+
+The other 105 files contain varying amounts of rows depending on how long it took the athlete to complete the throw and seven columns; time, acceleration on x, y, z axes, and angular velocity on the x, y, z axes.
+
+### Processing Steps
+
+* Rename columns
+* Focus on acceleration and ignore the angular velocity (for now)
+* Intergrate acceleration to calculate the velocities
+* Smoothen the values to help reduce noise
+* Calculate the vector magnitude (acceleration and velocity)
+* Focusing on readings near the acceleration peak
+* Scale the data
+* Create a training and testing datasets
+    * Each row would contain the acceleration magnitudes for a single throw (file)
+    * Append the radar gun reading to the observations
+    * Optional: Add wrist velocities
+
