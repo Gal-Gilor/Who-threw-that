@@ -363,3 +363,42 @@ def RMSE(actual: Union[List, int, float], predictions: Union[List, int, float]) 
     '''
     MSE = mean_squared_error(actual, predictions)
     return round(np.sqrt(MSE), 2)
+
+def plot_feature_importance(model: BaseEstimator, 
+                            feature_names: Union[pd.Series, np.array, List], n: Optional[int] = 12) -> None:
+    
+    ''' 
+    Receives an sklearn type model and creates feature importances graph
+    Note: Not all sklearn model object have this feature
+    inputs:
+        model: sklearn model object, or any other model with the feature_importances_ attribute
+        feature_names: array, containing the names of all features the model was trained on
+        n: integer, the number of features to include in the graph, 12 by default
+    
+    '''
+    # extract the feature importances
+    importances = model.feature_importances_    
+    
+    # combine the features importance and column names into a matrix 
+    feature_matrix = np.array([importances, feature_names])
+    
+    # convert from two rows 'n' columns to 'n' rows two columns matrix and sort
+    feature_matrix = feature_matrix.transpose()
+    feature_matrix = feature_matrix[feature_matrix[:, 0].argsort()][::-1]
+    
+    # separate and limit the features and name
+    importances = feature_matrix[:, 0][:n]
+    names = feature_matrix[:, 1][:n]
+
+    # plot the features
+    plt.figure(figsize=(14, 10))
+    plt.barh(names, importances, align='center')
+    
+    # adjust y ticks, add labels and titles
+    plt.yticks(name[::-1], names)
+    plt.xticks(rotation=45)
+    plt.title('Feature Importances', fontsize=18)
+    plt.xlabel('Importance', fontsize=16)
+    plt.ylabel('Features', fontsize=16)
+    return
+
