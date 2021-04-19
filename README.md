@@ -48,6 +48,8 @@ The other 105 files contain varying amounts of rows depending on how long it too
   - Append the radar gun reading to the observations
   - Optional: Add wrist velocities
 
+*I recommend jumping straight to the final_notebook. I maintained the other notebooks as an archive and testing grounds for new functions*
+
 ## Results
 
 The model achieves an RMSE of 2.89 meters per second on the test set. Whereas some of the predictions are highly accurate, some are vastly over or under-estimated. I suspect that by training the model only on the accelerations, I may have constrained the model's ability to estimate the final velocity in some cases.
