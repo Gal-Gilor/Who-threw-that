@@ -12,11 +12,8 @@ from typing import Optional, List, Dict, Union
 from scipy.stats import randint, shapiro
 from scipy.integrate import cumtrapz
 
-from sklearn.compose import ColumnTransformer
+
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import FunctionTransformer
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.linear_model import LinearRegression
@@ -385,7 +382,6 @@ def plot_feature_importance(model: BaseEstimator,
     # convert from two rows 'n' columns to 'n' rows two columns matrix and sort
     feature_matrix = feature_matrix.transpose()
     feature_matrix = feature_matrix[feature_matrix[:, 0].argsort()][::-1]
-    
     # separate and limit the features and name
     importances = feature_matrix[:, 0][:n]
     names = feature_matrix[:, 1][:n]
@@ -395,7 +391,7 @@ def plot_feature_importance(model: BaseEstimator,
     plt.barh(names, importances, align='center')
     
     # adjust y ticks, add labels and titles
-    plt.yticks(name[::-1], names)
+    plt.yticks(names[::-1], names[::-1])
     plt.xticks(rotation=45)
     plt.title('Feature Importances', fontsize=18)
     plt.xlabel('Importance', fontsize=16)
