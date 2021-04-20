@@ -32,11 +32,11 @@ The file 'Speed-Filenames.csv' contains 105 rows and two columns; radar gun spee
 
 According to the Shapiro-Wilk normality test, the measured speeds follow a normal distribution. Failed to reject the null hypothesis with 95% confidence.
 
-![Histogram for the measured ball velocity](./figures/radar_speed_histogram.jpg)*Fig 1. Measured radar gun velocities hisogram. Statistic=0.976, p_value=0.053, alpha=0.05.*
+![Histogram for the measured ball velocity](./figures/radar_speed_histogram.jpg) *Fig 1. Measured radar gun velocities hisogram. Statistic=0.976, p_value=0.053, alpha=0.05.*
 
 The other 105 files contain varying amounts of rows depending on how long it took the athlete to complete the throw and seven columns; time, acceleration on x, y, z axes, and angular velocity on the x, y, z axes.
 
-![Scatter plot showing the acceleartion vector on all three axes](./figures/xyz_acceleration_graph.png)*Fig 2. Scatter plot showing the acceleartion vector on the X, Y, Z axes on one of raw-data files.*
+![Scatter plot showing the acceleartion vector on all three axes](./figures/xyz_acceleration_graph.png) *Fig 2. Scatter plot showing the acceleartion vector on the X, Y, Z axes on one of raw-data files.*
 
 The original raw data contained some noise. In this instance, noise is the term for measurement errors obtained by the sensor.
 
