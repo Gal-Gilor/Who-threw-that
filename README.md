@@ -45,13 +45,15 @@ The original raw data contained some noise. In this instance, noise is the term 
 For example, in Fig. 3, we can see the change in acceleration over time on the X-axis. However, this change is not smooth. The acceleration shows small oscillations, which typically inhibits the modeling training.
 Consequently, I applied the rolling average with a 151 frame window size for every point along the axes' trajectory.
 
-![post filtering change in acceleration over x axis over timer](./figures/post_filter_accel_x.jpg)*Fig 4. Post filtering change in acceleration over time*
+![post filtering change in acceleration over x axis over timer](./figures/post_filter_accel_x.jpg)
+*Fig 4. Post filtering change in acceleration over time*
 
 Although it's not perfect, it filters most of the noise.
 
 Additionally, to increase the model's ability to learn, I capture readings around the peak acceleration on the x-axis.  I assume the players would try to throw the ball when their wrists are at peak momentum. Therefore, at every throw, I find the maximum acceleration and capture 100 frames before and after.
 
-![post filtering peak acceleration over time](./figures/post_filter_peak_accel_x.jpg)*Fig 5. Post filtering change in acceleration over time around the throw's maximum acceleration.*
+![post filtering peak acceleration over time](./figures/post_filter_peak_accel_x.jpg)
+*Fig 5. Post filtering change in acceleration over time around the throw's maximum acceleration.*
 
 ### Processing Steps
 
