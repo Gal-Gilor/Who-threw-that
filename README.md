@@ -30,9 +30,28 @@ The owner published 106 files containing information.
 
 The file 'Speed-Filenames.csv' contains 105 rows and two columns; radar gun speed and the file name with the IMU measurements.
 
+According to the Shapiro-Wilk normality test, the measured speeds follow a normal distribution. Failed to reject the null hypothesis with 95% confidence.
+
+![Histogram for the measured ball velocity](./figures/radar_speed_histogram.jpg) *Fig 1. Measured radar gun velocities hisogram. Statistic=0.976, p_value=0.053. alpha=0.05*
+
 The other 105 files contain varying amounts of rows depending on how long it took the athlete to complete the throw and seven columns; time, acceleration on x, y, z axes, and angular velocity on the x, y, z axes.
 
-![Scatter plot showing the acceleartion vector on all three axes](./figures/xyz_acceleration_graph.png) *Fig 1. Scatter plot showing the acceleartion vector on the X, Y, Z axes.*
+![Scatter plot showing the acceleartion vector on all three axes](./figures/xyz_acceleration_graph.png) *Fig 2. Scatter plot showing the acceleartion vector on the X, Y, Z axes on one of raw-data files.*
+
+The original raw data contained some noise. In this instance, noise is the term for measurement errors obtained by the sensor.
+
+![change in acceleration over x axis over timer](./figures/change_in_acceleration_x.jpg) *Fig 3. Change in acceleration over time (Jerk)*
+
+For example, in Fig. 3, we can see the change in acceleration over time on the X-axis. However, this change is not smooth. The acceleration shows small oscillations, which typically inhibits the modeling training.
+Consequently, I applied the rolling average with a 151 frame window size for every point along the axes' trajectory.
+
+![post filtering change in acceleration over x axis over timer](./figures/post_filter_accel_x.jpg) *Fig 4. Post filtering change in acceleration over time*
+
+Although it's not perfect, it filters most of the noise.
+
+Additionally, to increase the model's ability to learn, I capture readings around the peak acceleration on the x-axis.  I assume the players would try to throw the ball when their wrists are at peak momentum. Therefore, at every throw, I find the maximum acceleration and capture 100 frames before and after.
+
+![post filtering peak acceleration over time](./figures/post_filter_peak_accel_x.jpg) *Fig 5. Post filtering change in acceleration over time around the throw's maximum acceleration*
 
 ### Processing Steps
 
@@ -48,11 +67,11 @@ The other 105 files contain varying amounts of rows depending on how long it too
   - Append the radar gun reading to the observations
   - Optional: Add wrist velocities
 
-*I recommend jumping straight to the final_notebook. I maintained the other notebooks as an archive and testing grounds for new functions*
+_I recommend jumping straight to the final_notebook. I maintained the other notebooks as an archive and testing grounds for new functions_
 
 ## Results
 
-The model achieves an RMSE of 2.89 meters per second on the test set. Whereas some of the predictions are highly accurate, some are vastly over or under-estimated. I suspect that by training the model only on the accelerations, I may have constrained the model's ability to estimate the final velocity in some cases.
+The best model achieves an RMSE of 2.89 meters per second on the test set. Whereas some of the predictions are highly accurate, some are vastly over or under-estimated. I suspect that by training the model only on the accelerations, I may have constrained the model's ability to estimate the final velocity in some cases.
 
 ## Summary
 
@@ -62,4 +81,4 @@ Before modeling, I calculated the wrist's velocity at every time frame by integr
 
 I randomly selected 84 out of the 105 observations (80%) to train the model and evaluated the model's performance on the remaining 21 observations (20%). The model achieved an RMSE of 2.89 m/s, providing quality predictions, for the most part.
 
-![Scatter plot comparing the predicted speeds against the actual speeds](./figures/svm_predicted_scatter.jpg) *Fig 2. Scatter plot comparing the speed predictions made by the SVM model against the actual speeds records by the radar gun.*
+![Scatter plot comparing the predicted speeds against the actual speeds](./figures/svm_predicted_scatter.jpg) *Fig 6. Scatter plot comparing the speed predictions made by the SVM model against the actual speeds records by the radar gun.*
