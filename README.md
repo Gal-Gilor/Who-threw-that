@@ -32,7 +32,9 @@ The file 'Speed-Filenames.csv' contains 105 rows and two columns; radar gun spee
 
 According to the Shapiro-Wilk normality test, the measured speeds follow a normal distribution. Failed to reject the null hypothesis with 95% confidence.
 
-![Histogram for the measured ball velocity](./figures/radar_speed_histogram.jpg) *Fig 1. Measured radar gun velocities hisogram. Statistic=0.976, p_value=0.053, alpha=0.05.*
+![Histogram for the measured ball velocity](./figures/radar_speed_histogram.jpg) 
+
+*Fig 1. Measured radar gun velocities hisogram. Statistic=0.976, p_value=0.053, alpha=0.05.*
 
 The other 105 files contain varying amounts of rows depending on how long it took the athlete to complete the throw and seven columns; time, acceleration on x, y, z axes, and angular velocity on the x, y, z axes.
 
@@ -58,7 +60,6 @@ Additionally, to increase the model's ability to learn, I capture readings aroun
 ![post filtering peak acceleration over time](./figures/post_filter_peak_accel_x.jpg) 
 
 *Fig 5. Post filtering change in acceleration over time around the throw's maximum acceleration.*
-
 
 ### Processing Steps
 
